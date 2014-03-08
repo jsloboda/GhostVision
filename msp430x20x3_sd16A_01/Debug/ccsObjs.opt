@@ -1,0 +1,1 @@
+"./msp430x20x3_sd16A_01.obj" "../lnk_msp430f2013.cmd" -l"libc.a" 
