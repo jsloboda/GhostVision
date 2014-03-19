@@ -1,7 +1,7 @@
 %Filter3     Perform Low-pass, High-pass and Band-pass filters on data
 %Assumes data is given in a column vector, z
 
-z = recordedData( 3, 100 ); %createSimData(1, Fs)'; %data1;
+z = close_to_deck; %recordedData( 3, 100 ); %createSimData(1, Fs)'; %data1;
 
 Fs= 100; %input('Enter sampling rate  ');   % Fs = sampling rate
 Ts=1/Fs;
@@ -73,7 +73,7 @@ grid
 
 
 % write to text file 
-% fileID = fopen('data5.txt','w');
+% fileID = fopen('Test_deck_tilted_filtered.txt','w');
 % fprintf(fileID,'%f \r\n',datf);
 % fclose(fileID);
 
