@@ -1,9 +1,9 @@
 %Filter3     Perform Low-pass, High-pass and Band-pass filters on data
 %Assumes data is given in a column vector, z
 
-z = close_to_deck; %recordedData( 3, 100 ); %createSimData(1, Fs)'; %data1;
+z = data1; %recordedData( 3, 100 ); %createSimData(1, Fs)'; %data1;
 
-Fs= 100; %input('Enter sampling rate  ');   % Fs = sampling rate
+Fs= 488; %input('Enter sampling rate  ');   % Fs = sampling rate
 Ts=1/Fs;
 Lz=length(z);
 n=[0:Lz-1]';
@@ -17,7 +17,7 @@ N = 2^Np2;   %N = fft size
 Ftype = 1; %input('Select filter type (1/2/3 for LP/HP/BP) ');
 if (Ftype == 1)
 %Implement LP Filter (with lower cut-off at LC Hz)
-  LC = 3; %input('Enter Lower Cut-off Freqeuncy in Hz ');
+  LC = 2; %input('Enter Lower Cut-off Freqeuncy in Hz ');
   KLC = round(1 + LC*N/Fs);
   IKLC = N-KLC + 1;
   H = ones(N,1);
@@ -55,7 +55,7 @@ datf = real(ifft(datKH));  %dataf = filtered data
 datf = datf(1:length(z));
 
 % Plot results
-figure(1)
+figure;
 subplot(311)
 plot(t,dat)
 grid
@@ -71,11 +71,12 @@ plot(t,datf)
 title('Filtered data');
 grid
 
-
+data1fLC2 = datf; 
+save('UARTdata1fLC2.mat', 'data1fLC2');
 % write to text file 
-% fileID = fopen('Test_deck_tilted_filtered.txt','w');
-% fprintf(fileID,'%f \r\n',datf);
-% fclose(fileID);
+fileID = fopen('data1fLC2.txt','w');
+fprintf(fileID,'%f \r\n',datf);
+fclose(fileID);
 
 
 
