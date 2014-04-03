@@ -1,0 +1,8 @@
+DLL {
+	global:
+		basicFilter_BP;
+		basicFilter_BP_initialize;
+		basicFilter_BP_terminate;
+	local:
+		*;
+};

@@ -19,12 +19,12 @@ Fs = 100; % Hz
 
 %% get data
 
-load('sampledata.mat')
+%load('sampledata.mat')
 % down-sample: keep every 80th sample to go from 8000->100 Hz
-data = downsample(data3, 80);
+%data = downsample(data3, 80);
 % eliminate first 100 samples (motion artifacts in certain data files)
-data = data(100:end);
-
+%data = data(100:end);
+data = data1;
 figure('Name','signal');
 plot(data)
 
