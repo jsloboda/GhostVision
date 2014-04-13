@@ -1,0 +1,43 @@
+#include <vector>
+#include "wavelet_transform.h"
+#include <string>
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <string>
+#include <iostream>
+#include <cstdlib>
+
+#define INCLUDE_GSLWAVELET (1)
+#if INCLUDE_GSLWAVELET
+#include <gsl/gsl_sort.h>
+#include <gsl/gsl_wavelet.h>
+
+
+void wavelet_transform(double *filtered_data, double *transformed_data,double num_level,int fft_size)
+{
+
+	
+
+
+  gsl_wavelet *w;
+  gsl_wavelet_workspace *work;
+
+  w = gsl_wavelet_alloc (gsl_wavelet_daubechies, 4);
+  work = gsl_wavelet_workspace_alloc (fft_size);
+  double *buffer_data = new double[4096];
+  transformed_data = buffer_data;
+  gsl_wavelet_transform_forward (w,transformed_data, num_level, fft_size, work);
+  
+
+
+ 
+  gsl_wavelet_free(w);
+  gsl_wavelet_workspace_free(work);
+
+ 
+
+}
+
+#endif
+
