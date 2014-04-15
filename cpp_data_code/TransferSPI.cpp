@@ -23,8 +23,9 @@ void transfer(uint16_t* data, int sockfd, char a)
 
 void transfer(int sockfd)
 {
-	unsigned int value, counter;
+	unsigned int value, counter;//, i;
   FILE *file;
+  //char name[60];
 
 	uint8_t bits = 16;
 	uint32_t speed = 2*500000;
@@ -49,11 +50,15 @@ void transfer(int sockfd)
   while (1)
   {
     //DataQueue *data = new DataQueue();
+    //snprintf(name, sizeof(name), "%d.dat", i);
+    //fopen(file, name, "w");
 	uint16_t *buff = new uint16_t[3664];
     counter = 0;
+    //i = 0;
     while(counter < 3664)
     {
-      //file = fopen("data5.dat", "a+");		
+      file = fopen("data6.txt", "a+");		
+      
       
 		
       do
@@ -66,21 +71,30 @@ void transfer(int sockfd)
 			pabort("can't send spi message");
       
       //printf("%.4X\n", rx[0]);
-      //fprintf(file, "%i\n", rx[0]);
+      fprintf(file, "%i\n", rx[0]);
       //fprintf(file, "%.4X\n", rx[0]);
 
       //data->push(rx[0]);
 		buff[counter++] = rx[0];
       
-      //fclose(file);
+      fclose(file);
 		//counter++;		
     }
    
+   	//i++;
 	//for (int i = 0; i < 3664; i++)
 	//{
 	//	if (!(i % 6)) puts("");
 	//	printf("%.4X ", buff[i]);
 	//}
+	
+	/*for (int i = 0; i < 3664; i++)
+		{
+			if (!(i % 6)) puts("");
+			printf("%i ", buff[i]);
+		}
+		cout << endl;*/
+
 
 	int n;
 	cout << "Writing...\n";
@@ -88,6 +102,8 @@ void transfer(int sockfd)
 	if (n < 0) 
     	fprintf(stderr, "ERROR writing from socket");
     	
+    	delete[] buff;
+    	//fclose(file);
 	//break;
   }
 
