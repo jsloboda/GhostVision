@@ -30,24 +30,24 @@ void bp_filt(double *data,double *filtered_samples, double lp_cutoff, double hp_
 	//double *filtered_samples = (double*)malloc(fft_size*sizeof(double));
 	int diff = fft_size - num_samples;
 	double zero_array [432] = {0};
-	
+
 
 	double *buffer_data = new double[4096];
 	std::copy(data,data+num_samples,buffer_data);
-	
-	
+
+
    	gsl_fft_real_transform (buffer_data,1,fft_size,real,work);
 	gsl_fft_real_wavetable_free (real);
 	int lc_index = (int)((lp_cutoff*num_samples/sample_rate)+0.5);
 	int hc_index = (int)((hp_cutoff*num_samples/sample_rate)+0.5);
-	
+
 	if (hc_index % 2 == 0)	{
 		hc_index -= -1;
 	}
 	if (lc_index % 2 == 0)	{
 		lc_index -= -1;
 	}
-	
+
 	for (int i = 0; i < fft_size; ++i)	{	
 		if ((i >= 2*lc_index) && (i <= 2*hc_index))	
 		{   // copy real/imaginary pair
@@ -58,11 +58,12 @@ void bp_filt(double *data,double *filtered_samples, double lp_cutoff, double hp_
 	 gsl_fft_halfcomplex_inverse (filtered_samples,1,fft_size,hc,work);
 	 gsl_fft_halfcomplex_wavetable_free (hc);
 	 gsl_fft_real_workspace_free (work);
-	 
-	
+	 delete buffer_data;
+
+
 		}	
 #endif	
-	
-	
+
+
 /*
 int main() { return 0;} */
